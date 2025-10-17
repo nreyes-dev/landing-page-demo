@@ -1,0 +1,69 @@
+@use "../../global" as *; // get variables/mixins if needed
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: clamp(72px, 12vw, 140px) 16px;
+  background: radial-gradient(1200px 500px at 50% -60%, rgba($primary, 0.25), transparent 70%);
+  overflow: hidden;
+  border-bottom: 1px solid $border;
+
+  &__inner {
+    max-width: 900px;
+    width: 100%;
+    animation: fade-in 0.6s ease forwards;
+  }
+
+  &__title {
+    font-size: clamp(32px, 6vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 12px;
+    letter-spacing: 0.3px;
+    color: $text;
+  }
+
+  &__subtitle {
+    margin: 0 0 24px;
+    color: $muted;
+    font-size: clamp(16px, 2.6vw, 20px);
+  }
+
+  &__cta {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    background: linear-gradient(180deg, $primary, $primary-strong);
+    color: #071230;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 8px 24px rgba($primary-strong, 0.25);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__glow {
+    position: absolute;
+    inset: -40% -20% auto -20%;
+    height: 60%;
+    background: radial-gradient(800px 320px at 50% 0%, rgba($primary-strong, 0.18), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,100 @@
+@use "../../global" as *;
+
+.testimonials {
+  text-align: center;
+
+  /* Tighter vertical rhythm on small screens */
+  &.section {
+    @media (max-width: 520px) {
+      padding-top: 40px;
+      padding-bottom: 48px;
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+    margin: 0 0 24px;
+    color: $text;
+  }
+
+  /* Mobile-first: card on first row, controls on second row (two columns) */
+  &__carousel {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr; /* controls row has two columns */
+    grid-template-areas:
+      "card card"
+      "prev next";
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+/* Card */
+.testimonial {
+  grid-area: card;
+  background: $card;
+  border: 1px solid $border;
+  border-radius: 14px;
+  padding: 18px 16px;           /* tighter on mobile */
+  width: 100%;
+  max-width: 22rem;             /* keep centered/narrow on phones */
+  display: grid;
+  gap: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba($primary-strong, 0.12);
+  }
+
+  &__quote {
+    font-size: 16px;
+    color: $text;
+    margin: 0;
+  }
+
+  &__author {
+    color: $muted;
+    font-size: 14px;
+  }
+}
+
+/* Buttons (become two columns under the card on mobile) */
+.prev { grid-area: prev; }
+.next { grid-area: next; }
+
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $border;
+  border-radius: 12px;
+  color: $text;
+  padding: 10px 14px;
+  min-height: 44px;     /* touch target */
+  min-width: 88px;      /* touch width */
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba($primary-strong, 0.12);
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+/* Tablet/Desktop: three-column layout (Prev | Card | Next) */
+@media (min-width: 521px) {
+  .testimonials__carousel {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "prev card next";
+    gap: 12px;
+  }
+
+  .testimonial {
+    max-width: 28rem;
+    padding: 22px 20px; /* a bit roomier on larger screens */
+  }
+}
